@@ -5,9 +5,10 @@ function ItemsList(props) {
     const [filter, setFilter] = useState('');
     const [done, setDone] = useState([]);
 
-    function completeElement(index){
-        setDone([...done, index]);
+    function completeElement(item) {
+        setDone([...done, item.completed]);
     }
+
     /*
     let array = [1,2,3,4,5];
     let result = array.indexOf(3)
@@ -19,7 +20,7 @@ function ItemsList(props) {
     array.splice(2, 1)
 
     */
-    function uncompleteElement(elementoDaRimuovere){
+    function uncompleteElement(elementoDaRimuovere) {
 
         setDone(
             done.filter((todo) => {
@@ -60,7 +61,7 @@ function ItemsList(props) {
         <>
             <div className="list-container">
                 <div className="filter-input">
-                <h3>Your List</h3>
+                    <h3>Your List</h3>
                     <input type="text" placeholder="search" onChange={(e) => setFilter(e.target.value)} />
                 </div>
                 <div className="form-button">
@@ -69,15 +70,15 @@ function ItemsList(props) {
                 <ul className="items-list">
                     {props.list.filter((item) => {
                         if (filter !== '') {
-                            return item.includes(filter)
+                            return item.testo.includes(filter)
                         } else {
                             return true;
                         };
                     }).map((item, index) => {
-                        if (done.includes(index)){
-                            return <li onClick={() => uncompleteElement(index)} className="terminato" key={index}>{item}</li>
+                        if (item.completed === true) {
+                            return <li onClick={() => uncompleteElement(index)} className="terminato" key={index}>{item.testo}</li>
                         }
-                        return <li onClick={() => completeElement(index)} key={index}>{item}</li>
+                        return <li onClick={() => completeElement(item)} key={index}>{item.testo}</li>
                     })}
                 </ul>
             </div>
