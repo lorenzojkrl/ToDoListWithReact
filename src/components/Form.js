@@ -29,11 +29,11 @@ function Form(props) {
         2- questa funzione invoca a sua volta formSubmit passandogli come parametro l'evento
         ....prosegue a riga 10
         */
-        <form class="form-component" onSubmit={(e) => formSubmit(e)}>
-            <div class="form-header">
+        <form className="form-component" onSubmit={(e) => formSubmit(e)}>
+            <div className="form-header">
                 <h1>To-Do List</h1>
             </div>
-            <div class="text-input">
+            <div className="text-input">
                 {/* 
                 !!! PUNTO A -- START HERE -- !!!
                 1-text input ha inizialmente il valore di toDo(stringa vuota) da riga 6

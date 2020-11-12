@@ -4,9 +4,12 @@ function ItemsList(props) {
 
     const [filter, setFilter] = useState('');
     const [done, setDone] = useState([]);
+    const [stato, setStato] = useState('tutti')
+    // completati, nonCompletati, tutti
 
-    function completeElement(item) {
-        setDone([...done, item.completed]);
+
+    function completeElement(index) {
+        setDone([...done, index]);
     }
 
     /*
@@ -57,6 +60,10 @@ function ItemsList(props) {
         props.function();
     }
 
+    const mostraCompletati = () => {
+        setStato('completati')
+    }
+
     return (
         <>
             <div className="list-container">
@@ -64,22 +71,54 @@ function ItemsList(props) {
                     <h3>Your List</h3>
                     <input type="text" placeholder="search" onChange={(e) => setFilter(e.target.value)} />
                 </div>
-                <div className="form-button">
-                    <button onClick={clearDone}>Reset</button>
+                <div className="buttons">
+                    <div className="form-button">
+                        <button onClick={clearDone}>Reset</button>
+                    </div>
+                    <div className="form-button">
+                        <button onClick={mostraCompletati}>Solo completati</button>
+                    </div>
+                    <div className="form-button">
+                        <button onClick={() => setStato('nonCompletati')}>Solo non completati</button>
+                    </div>
+                    <div className="form-button">
+                        <button onClick={() => setStato('tutti')}>Tutti</button>
+                    </div>
                 </div>
                 <ul className="items-list">
-                    {props.list.filter((item) => {
-                        if (filter !== '') {
-                            return item.testo.includes(filter)
-                        } else {
-                            return true;
-                        };
-                    }).map((item, index) => {
-                        if (item.completed === true) {
-                            return <li onClick={() => uncompleteElement(index)} className="terminato" key={index}>{item.testo}</li>
-                        }
-                        return <li onClick={() => completeElement(item)} key={index}>{item.testo}</li>
-                    })}
+                    {props.list
+                        .filter((item, index) => {
+                            if (stato === 'tutti') {
+                                return true
+                            }
+                            if (stato === 'completati') {
+                                if (done.includes(index)) {
+                                    return true
+                                } else {
+                                    return false
+                                }
+                            } else {
+                                if (!done.includes(index)) {
+                                    return true
+                                } else {
+                                    return false
+                                }
+                            }
+
+                        })
+                        .filter((item) => {
+                            if (filter !== '') {
+                                return item.testo.includes(filter)
+                            } else {
+                                return true;
+                            };
+                        })
+                        .map((item, index) => {
+                            if (done.includes(index)) { // Da cambiare con oggetto.testo & completed
+                                return <li onClick={() => uncompleteElement(index)} className="terminato" key={index}>{item.testo}</li>
+                            }
+                            return <li onClick={() => completeElement(index)} key={index}>{item.testo}</li>
+                        })}
                 </ul>
             </div>
         </>
