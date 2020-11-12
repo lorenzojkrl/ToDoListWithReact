@@ -11,3 +11,132 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+/* FORM COMPONENT */
+.form-component{
+  background-color: rgba(146, 146, 146, 0.082);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  margin: 100px auto;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.form-header{
+  width: 100%;
+  border-bottom: 2px solid blue;
+  background-color: rgb(5, 37, 65);
+  color: rgba(255, 255, 255, 0.699);
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.text-input, .form-button{
+  margin: 20px 0 10px 0;
+}
+
+.text-input>input{
+  border: 2px solid rgba(0, 0, 255, 0.5);
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 2px;
+  outline: none;
+}
+
+.text-input>input::placeholder{
+  transition: all 300ms ease-in-out
+}
+
+.text-input>input:focus::placeholder{
+  color: white
+}
+
+button{
+  font-size: 1.5rem;
+  border: 3px solid rgba(0, 0, 255, 0.5);
+  padding: 0.2em 0.2em;
+  background-color: white;
+  color:  rgba(0, 0, 255, 0.651);
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+  border-radius: 2px;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+button:hover{
+  background-color: rgba(5, 37, 65, 0.651);;
+  color: white;
+}
+
+/* ITEMS LIST */
+.list-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-input{
+  background-color: rgba(146, 146, 146, 0.171);
+  width: 100%;
+  padding: 1.2em;
+  text-align: center;
+}
+
+.filter-input>h3{
+  color: rgb(5, 37, 65);
+  font-size: 1.3rem;
+}
+
+.filter-input>input{
+  width: 300px;
+  font-size: 1.2rem;
+  border: 3px solid rgba(26, 26, 235, 0.671);
+  outline: none;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+}
+
+.filter-input>input::placeholder{
+  transition:  all 300ms ease-in-out;
+}
+
+.filter-input>input:focus::placeholder{
+ color: white;
+}
+
+.items-list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.items-list>li{
+  margin: 25px;
+  padding: 25px;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.623);
+  background-color:rgba(5, 37, 65, 0.884);
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  min-width: 100px;
+  text-align: center;
+}
+
+.items-list>li:hover{
+  transform: translateY(-20px);
+  opacity: 0.8;
+}
+
+.terminato{
+  text-decoration: line-through;
+}
