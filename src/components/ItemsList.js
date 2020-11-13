@@ -5,8 +5,9 @@ function ItemsList(props) {
     const [filter, setFilter] = useState('');
     // const [done, setDone] = useState([]);
     const [stato, setStato] = useState('tutti')
-    // completati, nonCompletati, tutti
+    // valori per stato: completati, nonCompletati, tutti
 
+    // Array di oggetti chiamato toDoArray e passato come list
     // [{testo: 'aa', completed: false}, {testo: 'bb', completed: false}, {testo: 'cc', completed: false}]
 
     function completeElement(index) {
@@ -24,17 +25,7 @@ function ItemsList(props) {
         )
     }
 
-    /*
-    let array = [1,2,3,4,5];
-    let result = array.indexOf(3)
-    result = 2
 
-    let result2 = array.indexOf(30)
-    result2  = -1
-
-    array.splice(2, 1)
-
-    */
     function uncompleteElement(elementoDaRimuovere) {
 
         props.setToDoArray(props.list.filter((oggettoToDo) => {
@@ -42,19 +33,8 @@ function ItemsList(props) {
         }))
     }
 
-    /*
-    lista_iniziale = ["uno"]
-    map = [<li>uno</li>]
-    filter -> <li>uno</li> === "uno"
-
-    lista_iniziale = ["uno"]
-    filter -> "uno" === "uno"
-    lista_filtrata = ["uno"]
-    map = [<li>uno</li>
-    */
 
     function clearDone() {
-        // setDone([]);
         props.function();
     }
 
