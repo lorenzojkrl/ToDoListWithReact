@@ -44,7 +44,7 @@ function App() {
        componente che renderizza la lista 
        gli viene passata la props list che contiene l'array con i valori inseriti
       */}
-      <ItemsList list={toDoArray} function={clearList} />
+      <ItemsList list={toDoArray} function={clearList} setToDoArray={setToDoArray} />
     </div>
   );
 }

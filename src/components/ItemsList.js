@@ -3,13 +3,25 @@ import { useState } from 'react';
 function ItemsList(props) {
 
     const [filter, setFilter] = useState('');
-    const [done, setDone] = useState([]);
+    // const [done, setDone] = useState([]);
     const [stato, setStato] = useState('tutti')
     // completati, nonCompletati, tutti
 
+    // [{testo: 'aa', completed: false}, {testo: 'bb', completed: false}, {testo: 'cc', completed: false}]
 
     function completeElement(index) {
-        setDone([...done, index]);
+        props.setToDoArray(
+            props.list.map((oggettoToDo, idx) => {
+                if (idx === index) {
+                    return {
+                        ...oggettoToDo,
+                        completed: true
+                    }
+                } else {
+                    return oggettoToDo;
+                }
+            })
+        )
     }
 
     /*
@@ -25,25 +37,11 @@ function ItemsList(props) {
     */
     function uncompleteElement(elementoDaRimuovere) {
 
-        setDone(
-            done.filter((todo) => {
-                if (todo === elementoDaRimuovere) {
-                    return false;
-                }
-                return true;
-            })
-        );
-
-        /*
-            let array = done;
-            let result = done.indexOf(elementoDaRimuovere);
-            if(result !== -1) {
-                array.splice(result, 1)
-                console.log(array);
-                setDone(array)
-            }
-        */
+        props.setToDoArray(props.list.filter((oggettoToDo) => {
+            return oggettoToDo.completed
+        }))
     }
+
     /*
     lista_iniziale = ["uno"]
     map = [<li>uno</li>]
@@ -56,7 +54,7 @@ function ItemsList(props) {
     */
 
     function clearDone() {
-        setDone([]);
+        // setDone([]);
         props.function();
     }
 
@@ -92,19 +90,9 @@ function ItemsList(props) {
                                 return true
                             }
                             if (stato === 'completati') {
-                                if (done.includes(index)) {
-                                    return true
-                                } else {
-                                    return false
-                                }
-                            } else {
-                                if (!done.includes(index)) {
-                                    return true
-                                } else {
-                                    return false
-                                }
+                                return (item.completed)
                             }
-
+                            return (!item.completed)
                         })
                         .filter((item) => {
                             if (filter !== '') {
@@ -114,7 +102,7 @@ function ItemsList(props) {
                             };
                         })
                         .map((item, index) => {
-                            if (done.includes(index)) { // Da cambiare con oggetto.testo & completed
+                            if (item.completed) {
                                 return <li onClick={() => uncompleteElement(index)} className="terminato" key={index}>{item.testo}</li>
                             }
                             return <li onClick={() => completeElement(index)} key={index}>{item.testo}</li>
