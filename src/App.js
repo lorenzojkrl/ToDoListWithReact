@@ -7,28 +7,28 @@ function App() {
 
 
   //STATO dell'array Testi che contiene l'insieme dei diversi input
-  let initialValue = JSON.parse(localStorage.getItem('userList')) || [];
+  let initialValue = JSON.parse(localStorage.getItem('savedToDos')) || [];
 
-  const [textArray, setTextArray] = useState(initialValue);
+  const [toDoArray, setToDoArray] = useState(initialValue);
 
-  function handleFormSubmit(event, testo) {
+  function handleFormSubmit(event, oggettoToDo) {
     /*
     !!! PUNTO E !!!
     1-preveniamo il comportamento di default del componente form
       perche non vogliamo il refresh della pagina
-    2-aggiungiamo il testo dell input alla lista di input gia inseriti
+    2-aggiungiamo il oggettoToDo dell input alla lista di input gia inseriti
     */
     event.preventDefault();
-    setTextArray([...textArray, testo]);
+    setToDoArray([...toDoArray, oggettoToDo]);
   }
 
   useEffect(() => {
-    localStorage.setItem('userList', JSON.stringify(textArray));
+    localStorage.setItem('savedToDos', JSON.stringify(toDoArray));
   });
 
   function clearList() {
-    localStorage.removeItem('userList')
-    setTextArray([])
+    localStorage.removeItem('savedToDos')
+    setToDoArray([])
   }
 
   return (
@@ -44,7 +44,7 @@ function App() {
        componente che renderizza la lista 
        gli viene passata la props list che contiene l'array con i valori inseriti
       */}
-      <ItemsList list={textArray} function={clearList} />
+      <ItemsList list={toDoArray} function={clearList} />
     </div>
   );
 }
